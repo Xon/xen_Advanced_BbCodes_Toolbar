@@ -690,7 +690,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		}		
 	}
 
-	public static function parseTagAccordion(&$content, array &$options, &$templateName, &$fallBack, array $rendererStates, $parentClass)
+	public static function parseTagAccordion(&$content, array &$options, &$templateName, &$fallBack, array $rendererStates, $parentClass, array $tag)
 	{
 		$xenOptions = XenForo_Application::get('options');
 
@@ -769,15 +769,12 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 			$globalHeight = $xenOptions->AdvBBcodeBar_accordion_slides_maxheight;
 		}
 		
-		/*Get slides from content*/
-		$wip = BBM_Helper_BbCodes::getSpecialTags($content);
+		$wip = $tag['children'];
 		$content = ''; //Raz content
 		
 		$slides = array();
 		foreach($wip as $slide)
 		{
-			$slide_content = $slide['content'];
-			$slide_attributes = $slide['option'];
 			$height = $globalHeight;
 
 			/*Default Slave Options*/
@@ -785,6 +782,31 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 			$title = '';
 			$open = '';
 			$class_open = '';
+
+            if (!isset($slide['tag']) || $slide['tag'] != 'slide')
+            {
+                if (is_array($slide))
+                    $slide_content = $parentClass->renderSubTree(array($slide), $rendererStates);
+                else
+                {
+                    if (trim($slide) == '')
+                        continue;
+                    $slide_content = $slide;
+                }
+                $slides[] = array(
+                        'height' => $height,
+                        'content' => $slide_content,
+                        'align' => $align,
+                        'title' => ($xenOptions->AdvBBcodeBar_accordion_slides_rawtitles) ? strip_tags($title) : $title,
+                        'open' => $open,
+                        'class_open' => $class_open
+                    );
+                // contents of this slide are malformed. Inject the raw contents as a slide and move on
+                continue;
+            }
+
+			$slide_content = $parentClass->renderSubTree($slide['children'], $rendererStates);
+			$slide_attributes = $slide['option'];
 
 			if($slide_attributes)
 			{
