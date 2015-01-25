@@ -789,7 +789,9 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
             if (!isset($slide['tag']) || $slide['tag'] != 'slide')
             {
                 if (is_array($slide))
+                {
                     $slide_content = $parentClass->renderSubTree(array($slide), $rendererStates);
+                }
                 else
                 {
                     if (trim($slide) == '')
@@ -890,7 +892,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		}		
 	}
 
-	public static function parseTagTabs(&$content, array &$options, &$templateName, &$fallBack, array $rendererStates, $parentClass)
+	public static function parseTagTabs(&$content, array &$options, &$templateName, &$fallBack, array $rendererStates, $parentClass, array $tag)
 	{
 		$xenOptions = XenForo_Application::get('options');
 		$postid = $parentClass->getPostParam('post_id');
@@ -1004,7 +1006,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		}
 		
 		/*Get slides from content*/
-		$wip = BBM_Helper_BbCodes::getSpecialTags($content);
+		$wip = $tag['children'];
 		$content = ''; //Raz content
 		
 		$tabs = array();
@@ -1015,14 +1017,33 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		{
 			$id = $k+1;
 
+            if (!isset($slide['tag']) || $slide['tag'] != 'slide')
+            {
+                $slide_attributes = array();
+                if (is_array($slide))
+                {
+                    $slide_content = $parentClass->renderSubTree(array($slide), $rendererStates);
+                }
+                else
+                {
+                    if (trim($slide) == '')
+                        continue;
+                    $slide_content = $slide;
+                }
+            }
+            else
+            {
+                $slide_attributes = $slide['option'];
+                $slide_content = $parentClass->renderSubTree($slide['children'], $rendererStates);
+            }
+
 			$search = '#{tab=(\d{1,2})}(.*?){/tab}#ui';
 			$replace = '<a class="adv_tabs_link" href="#'.$uniqid.'_$1">$2</a>';
 			$replaceNoScript = '<a href="'.$requestUri.'#'.$uniqid.'_$1">$2</a>';			
 
-			$content = preg_replace($search, $replace, $slide['content']);
-			$contentNoScript = preg_replace($search, $replaceNoScript, $slide['content']);
+			$content = preg_replace($search, $replace, $slide_content);
+			$contentNoScript = preg_replace($search, $replaceNoScript, $slide_content);
 			
-			$slide_attributes = $slide['option'];
 			$title = '';
 			$hasAlreadyBeenOpened = false;
 			$align = 'center';
@@ -1096,7 +1117,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		}		
 	}
 
-	public static function parseTagSlider(&$content, array &$options, &$templateName, &$fallBack, array $rendererStates, $parentClass)
+	public static function parseTagSlider(&$content, array &$options, &$templateName, &$fallBack, array $rendererStates, $parentClass, array $tag)
 	{
 		$xenOptions = XenForo_Application::get('options');
 		$visitor = XenForo_Visitor::getInstance();
@@ -1249,7 +1270,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		}
 		
 		/*Get slides from content*/
-		$wip = BBM_Helper_BbCodes::getSpecialTags($content);
+		$wip = $tag['children'];
 		$content = ''; //Raz content
 		
 		$slides = array();
@@ -1260,8 +1281,27 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		foreach($wip as $k => $slide)
 		{
 			$id = $k+1;
-			$content = $slide['content'];
-			$slide_attributes = $slide['option'];
+
+            if (!isset($slide['tag']) || $slide['tag'] != 'slide')
+            {
+                $slide_attributes = array();
+                if (is_array($slide))
+                {
+                    $slide_content = $parentClass->renderSubTree(array($slide), $rendererStates);
+                }
+                else
+                {
+                    if (trim($slide) == '')
+                        continue;
+                    $slide_content = $slide;
+                }
+            }
+            else
+            {
+                $slide_attributes = $slide['option'];
+                $slide_content = $parentClass->renderSubTree($slide['children'], $rendererStates);
+            }
+
 			$title = '';
 			$hasAlreadyBeenOpened = false;
 			$open = false;
