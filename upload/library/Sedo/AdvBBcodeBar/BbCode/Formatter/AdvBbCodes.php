@@ -790,7 +790,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
             {
                 if (is_array($slide))
                 {
-                    $slide_content = $parentClass->renderSubTree(array($slide), $rendererStates);
+                    $slide_content = $parentClass->renderTagUnparsed($slide, $rendererStates);
                 }
                 else
                 {
@@ -1022,7 +1022,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
                 $slide_attributes = array();
                 if (is_array($slide))
                 {
-                    $slide_content = $parentClass->renderSubTree(array($slide), $rendererStates);
+                    $slide_content = $parentClass->renderTagUnparsed($slide, $rendererStates);
                 }
                 else
                 {
@@ -1287,7 +1287,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
                 $slide_attributes = array();
                 if (is_array($slide))
                 {
-                    $slide_content = $parentClass->renderSubTree(array($slide), $rendererStates);
+                    $slide_content = $parentClass->renderTagUnparsed($slide, $rendererStates);
                 }
                 else
                 {
