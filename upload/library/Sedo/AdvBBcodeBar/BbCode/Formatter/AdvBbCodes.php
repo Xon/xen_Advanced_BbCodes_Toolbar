@@ -764,10 +764,13 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 			$widthType = $xenOptions->AdvBBcodeBar_accordion_defaultwidth_unit;
 		}
 
-		if($globalHeight !== false && $globalHeight > $xenOptions->AdvBBcodeBar_accordion_slides_maxheight)
+        $maxheight = $xenOptions->AdvBBcodeBar_accordion_slides_maxheight;
+		if($globalHeight !== false && $globalHeight > $maxheight)
 		{
-			$globalHeight = $xenOptions->AdvBBcodeBar_accordion_slides_maxheight;
+			$globalHeight = $maxheight;
 		}
+        $defaultalign = $xenOptions->AdvBBcodeBar_accordion_slides_titles_defaultalign;
+        $rawtitles = $xenOptions->AdvBBcodeBar_accordion_slides_rawtitles;
 		
 		$wip = $tag['children'];
 		$content = ''; //Raz content
@@ -778,7 +781,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 			$height = $globalHeight;
 
 			/*Default Slave Options*/
-			$align = $xenOptions->AdvBBcodeBar_accordion_slides_titles_defaultalign;
+			$align = $defaultalign;
 			$title = '';
 			$open = '';
 			$class_open = '';
@@ -797,7 +800,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
                         'height' => $height,
                         'content' => $slide_content,
                         'align' => $align,
-                        'title' => ($xenOptions->AdvBBcodeBar_accordion_slides_rawtitles) ? strip_tags($title) : $title,
+                        'title' => ($rawtitles) ? strip_tags($title) : $title,
                         'open' => $open,
                         'class_open' => $class_open
                     );
@@ -851,9 +854,9 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 				$height = 22; //Min-height must be 22px to make overflow scroller visible
 			}
 			
-			if($height !== false && $height > $xenOptions->AdvBBcodeBar_accordion_slides_maxheight)
+			if($height !== false && $height > $maxheight)
 			{
-				$height = $xenOptions->AdvBBcodeBar_accordion_slides_maxheight; //Max-height Safety
+				$height = $maxheight; //Max-height Safety
 			}
 			
 			/*Add slide to slides array*/
@@ -861,7 +864,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 				'height' => $height,
 				'content' => $slide_content,
 				'align' => $align,
-				'title' => ($xenOptions->AdvBBcodeBar_accordion_slides_rawtitles) ? strip_tags($title) : $title,
+				'title' => ($rawtitles) ? strip_tags($title) : $title,
 				'open' => $open,
 				'class_open' => $class_open
 			);
