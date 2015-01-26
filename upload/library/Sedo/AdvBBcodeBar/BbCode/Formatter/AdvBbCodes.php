@@ -15,7 +15,10 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
             $parentTags += array(
                 'slide' => array(
                     'allowedParents' => array('accordion' => 1, 'tabs' => 1, 'slider' => 1),
-                )
+                ),
+                'tab' => array(
+                    'allowedParents' => array('tabs' => 1),
+                ),
             );
         }     
     }
