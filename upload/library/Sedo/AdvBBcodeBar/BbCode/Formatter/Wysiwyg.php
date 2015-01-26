@@ -1,5 +1,5 @@
 <?php
-class Sedo_AdvBBcodeBar_BbCode_Formatter_Base extends XFCP_Sedo_AdvBBcodeBar_BbCode_Formatter_Base
+class Sedo_AdvBBcodeBar_BbCode_Formatter_Wysiwyg extends XFCP_Sedo_AdvBBcodeBar_BbCode_Formatter_Wysiwyg
 {
     public function getTags()
     {

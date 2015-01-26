@@ -17,8 +17,10 @@ class Sedo_AdvBBcodeBar_Listener_AllInOne
 		switch($class)
         {
             case 'XenForo_BbCode_Formatter_Base':
-            case 'XenForo_BbCode_Formatter_Wysiwyg':
                 $extend[] = 'Sedo_AdvBBcodeBar_BbCode_Formatter_Base';
+                break;
+            case 'XenForo_BbCode_Formatter_Wysiwyg':
+                $extend[] = 'Sedo_AdvBBcodeBar_BbCode_Formatter_Wysiwyg';
                 break;
 		}
 	}

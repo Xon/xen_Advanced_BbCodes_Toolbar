@@ -8,6 +8,18 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		self::$_parentClass = $parentClass;
 	}
 
+    public static function populateTags(&$parentTags)
+    {
+        if(is_array($parentTags))
+        {
+            $parentTags += array(
+                'slide' => array(
+                    'allowedParents' => array('accordion' => 1, 'tabs' => 1, 'slider' => 1),
+                )
+            );
+        }     
+    }
+
 	public static function parseTagSpoilerbb(&$content, array &$options, &$templateName, &$fallBack, array $rendererStates, $parentClass)
 	{
 		$xenOptions = XenForo_Application::get('options');
