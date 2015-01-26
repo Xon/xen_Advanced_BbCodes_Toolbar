@@ -12,6 +12,17 @@ class Sedo_AdvBBcodeBar_Listener_AllInOne
 		}
 	}
 
+	public static function load_class($class, array &$extend)
+	{
+		switch($class)
+        {
+            case 'XenForo_BbCode_Formatter_Base':
+            case 'XenForo_BbCode_Formatter_Wysiwyg':
+                $extend[] = 'Sedo_AdvBBcodeBar_BbCode_Formatter_Base';
+                break;
+		}
+	}
+
 	/***
 	 *  MCE INTEGRATION
 	 **/	
