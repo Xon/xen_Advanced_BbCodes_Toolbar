@@ -199,6 +199,7 @@
       <wrapping_option></wrapping_option>
       <emptyContent_check>1</emptyContent_check>
       <options_separator>|</options_separator>
+      <stopPreRender>1</stopPreRender>
     </ParserOptions>
     <ParserPerms>
       <parser_has_usr>0</parser_has_usr>
@@ -812,6 +813,7 @@
       <wrapping_option></wrapping_option>
       <emptyContent_check>0</emptyContent_check>
       <options_separator>|</options_separator>
+      <stopPreRender>1</stopPreRender>
     </ParserOptions>
     <ParserPerms>
       <parser_has_usr>0</parser_has_usr>
@@ -972,6 +974,7 @@
       <wrapping_option></wrapping_option>
       <emptyContent_check>1</emptyContent_check>
       <options_separator>|</options_separator>
+      <stopPreRender>1</stopPreRender>
     </ParserOptions>
     <ParserPerms>
       <parser_has_usr>0</parser_has_usr>
