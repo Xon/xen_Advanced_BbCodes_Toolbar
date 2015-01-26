@@ -705,7 +705,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		}		
 	}
 
-	public static function parseTagAccordion(&$content, array &$options, &$templateName, &$fallBack, array $rendererStates, $parentClass, array $tag)
+	public static function parseTagAccordion(&$content, array &$options, &$templateName, &$fallBack, array $rendererStates, $parentClass, $uniqueID, array $tag)
 	{
 		$xenOptions = XenForo_Application::get('options');
 
@@ -907,7 +907,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		}		
 	}
 
-	public static function parseTagTabs(&$content, array &$options, &$templateName, &$fallBack, array $rendererStates, $parentClass, array $tag)
+	public static function parseTagTabs(&$content, array &$options, &$templateName, &$fallBack, array $rendererStates, $parentClass, $uniqueID, array $tag)
 	{
 		$xenOptions = XenForo_Application::get('options');
 		$postid = $parentClass->getPostParam('post_id');
@@ -1132,7 +1132,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		}		
 	}
 
-	public static function parseTagSlider(&$content, array &$options, &$templateName, &$fallBack, array $rendererStates, $parentClass, array $tag)
+	public static function parseTagSlider(&$content, array &$options, &$templateName, &$fallBack, array $rendererStates, $parentClass, $uniqueID, array $tag)
 	{
 		$xenOptions = XenForo_Application::get('options');
 		$visitor = XenForo_Visitor::getInstance();
